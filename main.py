@@ -3,23 +3,22 @@ import time
 import sys
 
 
-def abrirArquivo():
+def abrirArquivo():#abre o arquivo Json
     with open('desafios.json', 'r', encoding="utf-8") as arquivo:
         return json.load(arquivo)
 
 
-def salvarArquivo(dados):
+def salvarArquivo(dados):#salva os dados no arquivo Json
     with open('desafios.json', 'w', encoding="utf-8") as arquivo:
         json.dump(dados, arquivo, indent=4)
         print('Arquivo salvo com sucesso!')
         time.sleep(1)
 
 
-def adicionarDesafio():
+def adicionarDesafio():#adiciona um novo desafio 
     desafios = abrirArquivo()
-    id_novo_desafio = str(max([int(k) for k in desafios.keys()]) + 1)
+    id_novo_desafio = str(max([int(k) for k in desafios.keys()]) + 1)#cria o id para o dicionario
 
-    # Adiciona um novo desafio
     print('Adicionar Desafio')
     print('-----------------')
     print('Digite os dados do desafio:')
@@ -44,7 +43,7 @@ def adicionarDesafio():
     menu()
 
 
-def listarDesafios():
+def listarDesafios():#lista os desafios
     desafios = abrirArquivo()
     print('Listar Desafios')
     print('-----------------')
@@ -60,7 +59,7 @@ def listarDesafios():
     menu()
 
 
-def removerDesafio():
+def removerDesafio():#remove o desafio via id 
     desafios = abrirArquivo()
     print("remover desafio")
     print('-----------------')
@@ -71,7 +70,7 @@ def removerDesafio():
 
     desafio_excluir = input("Digite o id da pergunta que deseja remover: ")
 
-    while desafio_excluir not in desafios:
+    while desafio_excluir not in desafios:# verifica se o id exisite no json
         print("Desafio não encontrado.")
         desafio_excluir = input("Digite o id da pergunta que deseja remover: ")
 
@@ -82,7 +81,7 @@ def removerDesafio():
     menu()
 
 
-def concluirDesafio():
+def concluirDesafio(): #conclui o desafio via id 
     desafios = abrirArquivo()
     print("Concluir desafio")
     print('-----------------')
@@ -94,7 +93,7 @@ def concluirDesafio():
         print('')
     desafio_concluir = input("Digite o ID do Desafio que deseja Concluir: ")
 
-    while desafio_concluir not in desafios:
+    while desafio_concluir not in desafios:# verifica se o id exisite no json
         print("Desafio não encontrado.")
         desafio_concluir = input(
             "Digite o ID do Desafio que deseja Concluir: ")
@@ -105,7 +104,7 @@ def concluirDesafio():
     time.sleep(1)
     menu()
 
-def desfazerDesafio():
+def desfazerDesafio():# desfaz a conslusão do desafio
     desafios = abrirArquivo()
     print("Desfazer desafio")
     print('-----------------')
@@ -117,7 +116,7 @@ def desfazerDesafio():
         print('')
     desafio_concluir = input("Digite o ID do Desafio que deseja Desfazer: ")
 
-    while desafio_concluir not in desafios:
+    while desafio_concluir not in desafios:# verifica se o id exisite no json
         print("Desafio não encontrado.")
         desafio_concluir = input("Digite o ID do Desafio que deseja Desfazer: ")
 
@@ -140,7 +139,11 @@ def menu():
     [0] - Sair      
     ''')
     opcao = int(input('Escolha uma opção: '))
-
+    while opcao not in [1, 2, 3, 4, 5, 0]:
+        print("Opção incorreta!")
+        opcao = int(input('Escolha uma opção: '))
+        print('')
+        
     match opcao:
         case 1:
             adicionarDesafio()
