@@ -11,8 +11,6 @@ def abrirArquivo():#abre o arquivo Json
 def salvarArquivo(dados):#salva os dados no arquivo Json
     with open('desafios.json', 'w', encoding="utf-8") as arquivo:
         json.dump(dados, arquivo, indent=4)
-        print('Arquivo salvo com sucesso!')
-        time.sleep(1)
 
 
 def adicionarDesafio():#adiciona um novo desafio 
